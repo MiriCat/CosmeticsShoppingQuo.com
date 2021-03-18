@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Facebook - Inicia sesión o regístrate</title>
+    <style>
+        .container{
+            max-width: 500px;
+            margin: 40px auto;
+
+        }
+    </style>
+
+</head>
+<body>
+    
+        <div  style=" width: 410px;   margin-left: 10.8rem">
+                <br><br><br>
+                <br><br><br>
+          <p style="font-size:51px"> <b style="color: rgb(10, 128, 206)">facebook</b> </p>
+          <p style="font-size:23px;  color: rgb(12, 8, 8)"> Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</p>
+
+        
+
+      </div>
+
+
+
+
+    <div class="container"  >
+    <div id="main">   
+            <form @submit.prevent="addUser">
+ 
+    <div class="row row-cols-3">
+        <div class="col-6">
+
+    <div class="container" style="margin-top:  -16.9rem; margin-left: 10.4rem;">
+    
+        <div class="row">
+          <div class="col">
+              </div>
+
+          <div class="col-5">
+            <div class="card" style="width:  22.5rem; height: 20rem; border-radius: .5rem;">
+                <div class="container">
+                  
+                    <div class="container"  style="width: 22.5rem; margin-top:  -1.6rem;  margin-left: -1rem;">
+                      <input v-model="correo" type="text" style="height: 3.3rem; border-radius: .5rem;"  id="correo" class="form-control" aria-describedby="passwordHelpInline" placeholder="  Correo electr&oacute;nico o n&uacute;mero de tel&eacute;fono">
+                    
+                   </div>
+                   
+                              
+                   <div class="container"  style="width:  22.5rem; margin-top:  -1.6rem;  margin-left: -1rem;">
+                        <input  v-model="password" type="password" style="height: 3.3rem; border-radius: .5rem;"  id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" placeholder="Contrase&ntilde;a">
+                      </div>
+                  
+
+                      <div class="container"  style=" margin-top:  -1.6rem;  margin-left: -1rem;">
+                        <button   style="width:  20.5rem;  height: 3rem; border-radius: .5rem;" class="btn btn-primary"><b> Iniciar Sesi&oacuten </b></button>     
+                              </div>
+
+                              
+                      <div class="container"  style=" margin-top:  -1.6rem;  margin-left: -1rem;">  
+                        <p ><center><a href="#">¿Olvidaste tu contraseña?</a></center></p>    
+                              </div>
+
+                            </form>
+                              <div class="container"  style=" margin-top:  -1.6rem;  margin-left: -1rem;"> 
+                                
+                              <hr> 
+                              <center><button  style=" height: 2.3rem; border-radius: .5rem;" type="button" class="btn btn-success"><b>Crear cuenta nueva </b></button></center>
+                                      </div>
+                           
+                  </div >
+               
+              </div>
+        
+          </div>
+        </div>
+
+      </div>
+
+ 
+
+
+    </div>
+
+    </div>
+          
+</div>
+</div>
+</div>
+
+     <!--Librerias que se usaran-->
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+    
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyDvownhTFm5y3mkU18Kc1EaJfqPF-OLxy4",
+            authDomain: "spamm-a7f71.firebaseapp.com",
+            projectId: "spamm-a7f71",
+            storageBucket: "spamm-a7f71.appspot.com",
+            messagingSenderId: "487001085879",
+            appId: "1:487001085879:web:0ccabf2b2efc1201d87a32",
+            measurementId: "G-3M78RCLP7X"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(config); // Se inicializa la aplicación y se manda el parámetro el cual es config.
+        const db = firebase.firestore() //Se crea una constante para la db, la cual llama a Firestore
+        const colecion = db.collection('usuario')//Se crea otra constante hace la llama desde la constante de la db, la cual vincula a la clexion de datos usuario.
+ 
+        new Vue({ //valores para vue
+                el: '#main', //usa lo que tiene main
+                data:{ //variables
+                    correo:null,
+                    password:null,
+                    usuario:[]
+                },
+                //Se crea un método, el cual limpia el contenido del arreglo, obtendrá los valores que estén en la colección y guardara los valores en dicho arreglo.
+                mounted(){
+                    this.usuario = []
+                    colecion.get().then( (r) => r.docs.map( (item) => this.usuario.push({id:item.id, data:item.data()})))
+                },
+                methods:{ //metodo
+                    addUser(){
+                        colecion.add({//metodo usado para colecion 
+                            correo:this.correo, //variables de los input
+                            password :this.password
+                        }).then( () => this.$mount()) //se llama a mount para limpiar
+                    }
+                }
+            })
+    </script>
+</body>
+</html>
